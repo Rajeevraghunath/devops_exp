@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f7f2">
+  <title>paisa — your money, in focus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="responsive.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#overview"><span class="brand-mark">p</span><span>paisa<span class="brand-period">.</span></span></a>
+      <p class="side-label">YOUR MONEY</p>
+      <nav class="primary-nav">
+        <button class="nav-link active" data-view="overview"><span class="nav-icon icon-home"></span>Overview</button>
+        <button class="nav-link" data-view="transactions"><span class="nav-icon icon-list"></span>Transactions</button>
+        <button class="nav-link" data-view="budgets"><span class="nav-icon icon-budget"></span>Budgets</button>
+        <button class="nav-link" data-view="insights"><span class="nav-icon icon-chart"></span>Insights</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="privacy-note"><i class="privacy-dot"></i><span>Private by nature<small>Your data stays on this device</small></span></div>
+        <button class="nav-link settings-link" data-view="settings"><span class="nav-icon icon-settings"></span>Settings</button>
+        <div class="profile-row"><span class="avatar">R</span><span><strong>Rajeev</strong><small>Personal space</small></span><i class="profile-menu">•••</i></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <a class="mobile-brand" href="#overview"><span class="brand-mark">p</span><span>paisa<span class="brand-period">.</span></span></a>
+        <div class="period-control"><button class="icon-button" id="previousMonth" aria-label="Previous month">‹</button><span id="currentMonth">November 2026</span><button class="icon-button" id="nextMonth" aria-label="Next month">›</button></div>
+        <div class="top-actions"><span class="sync-state"><i></i> Saved locally</span><button class="button button-primary quick-add" id="quickAdd"><span class="plus">+</span> Add expense</button></div>
+      </header>
+
+      <section class="view active" id="view-overview" aria-labelledby="pageTitle">
+        <div class="page-heading"><div><p class="eyebrow" id="todayLabel">SATURDAY, NOVEMBER 14</p><h1 id="pageTitle">Good morning, Rajeev<span class="heading-spark">.</span></h1><p class="subheading">A clear view of your money, one day at a time.</p></div><button class="button button-light desktop-add" id="overviewAdd"><span class="plus">+</span> Log a spend</button></div>
+        <div class="dashboard-grid">
+          <article class="summary-card"><div class="summary-top"><span class="card-kicker">SPENT THIS MONTH</span><span class="trend-pill">↘ 12% <small>vs last month</small></span></div><div class="spend-total" id="totalSpent">₹25,399</div><div class="summary-divider"></div><div class="summary-bottom"><div><span class="muted-label">Monthly budget</span><strong id="budgetTotal">₹45,000</strong></div><div class="remaining-block"><span class="muted-label">Left to spend</span><strong id="remainingTotal">₹19,601</strong></div><div class="progress-ring"><span id="budgetPercent">56%</span></div></div><div class="budget-track"><span id="overallProgress"></span></div></article>
+          <article class="streak-card"><div class="streak-top"><div><span class="card-kicker">YOUR LOGGING RHYTHM</span><div class="streak-title">Small steps add up.</div></div><span class="streak-icon">✳</span></div><div class="week-dots" id="weekDots" aria-label="This week's logging activity"></div><div class="streak-foot"><span>Log a little, often.</span><span class="streak-note">One day at a time</span></div></article>
+        </div>
+        <div class="section-heading"><div><p class="eyebrow">THE BIG PICTURE</p><h2>Where it went</h2></div><button class="text-button" data-goto="insights">Full report <span>↗</span></button></div>
+        <div class="content-grid"><article class="panel category-panel"><div class="panel-heading"><div><h3>Top categories</h3><p>Your biggest spends this month</p></div><span class="more-button">•••</span></div><div class="category-list" id="topCategories"></div></article><article class="panel insight-panel"><div class="insight-label"><span class="insight-star">✳</span> PAISA NOTE</div><p class="insight-copy" id="insightCopy">Your spending adds up, one small choice at a time.</p><button class="text-button" data-goto="insights">See your patterns <span>→</span></button><span class="insight-decoration" aria-hidden="true">↗</span></article></div>
+        <div class="section-heading recent-heading"><div><p class="eyebrow">JUST THE LATEST</p><h2>Recent activity</h2></div><button class="text-button" data-goto="transactions">All transactions <span>→</span></button></div>
+        <article class="panel recent-panel"><div class="transaction-list" id="recentTransactions"></div></article>
+      </section>
+
+      <section class="view" id="view-transactions" aria-labelledby="transactionsTitle">
+        <div class="page-heading"><div><p class="eyebrow">YOUR MONEY, ACCOUNTED FOR</p><h1 id="transactionsTitle">Transactions<span class="heading-spark">.</span></h1><p class="subheading">Every little thing, all in one place.</p></div><button class="button button-primary" data-add><span class="plus">+</span> Add transaction</button></div>
+        <div class="filter-bar"><label class="search-field"><span class="search-icon"></span><input id="transactionSearch" type="search" placeholder="Search notes or categories" aria-label="Search transactions"></label><select id="categoryFilter" aria-label="Filter by category"><option value="all">All categories</option></select><select id="modeFilter" aria-label="Filter by payment mode"><option value="all">All payment modes</option><option>UPI</option><option>Card</option><option>Cash</option><option>Wallet</option><option>Bank transfer</option></select></div>
+        <p class="transaction-date-label" id="transactionMonthLabel">NOVEMBER 2026</p><article class="panel transaction-panel"><div class="transaction-list" id="allTransactions"></div><div class="empty-state hidden" id="emptyTransactions">No transactions match these filters.</div></article>
+      </section>
+
+      <section class="view" id="view-budgets" aria-labelledby="budgetsTitle">
+        <div class="page-heading"><div><p class="eyebrow">SPEND WITH INTENTION</p><h1 id="budgetsTitle">Your budgets<span class="heading-spark">.</span></h1><p class="subheading">A little structure makes room for what matters.</p></div><button class="button button-light" id="resetBudgets">Reset plan</button></div>
+        <article class="panel overall-budget-panel"><div class="budget-panel-copy"><span class="card-kicker">MONTHLY SPENDING LIMIT</span><h2 id="budgetSpentLabel">₹25,399 <span>spent</span></h2><p id="budgetLeftLabel">₹19,601 left this month</p></div><div class="budget-input-wrap"><label for="overallBudgetInput">Overall limit</label><div class="money-input"><span>₹</span><input id="overallBudgetInput" type="number" min="0" step="500" aria-label="Overall monthly budget"></div></div><div class="budget-track large-track"><span id="budgetPageProgress"></span></div></article>
+        <div class="section-heading budget-section-heading"><div><p class="eyebrow">A LITTLE MORE CONTROL</p><h2>Category limits</h2></div><span class="section-caption">Monthly</span></div><div class="budget-list" id="budgetList"></div>
+      </section>
+
+      <section class="view" id="view-insights" aria-labelledby="insightsTitle">
+        <div class="page-heading"><div><p class="eyebrow">A MONTH IN PERSPECTIVE</p><h1 id="insightsTitle">Your insights<span class="heading-spark">.</span></h1><p class="subheading">Patterns worth noticing, without the spreadsheets.</p></div></div>
+        <div class="insights-grid"><article class="panel chart-panel"><div class="panel-heading"><div><h3>Spending by category</h3><p id="donutCaption">November 2026 · expenses</p></div><strong class="chart-total" id="donutTotal">₹25,399</strong></div><div class="donut-layout"><div class="donut-chart" id="donutChart"><div class="donut-hole"><small>TOTAL SPENT</small><strong id="donutCenter">₹25,399</strong></div></div><div class="chart-legend" id="chartLegend"></div></div></article><article class="panel chart-panel"><div class="panel-heading"><div><h3>Daily spending</h3><p>How your month is moving</p></div><span class="chart-unit">₹</span></div><div class="bar-chart" id="dailyChart"></div><div class="chart-axis"><span>1 Nov</span><span>7 Nov</span><span>14 Nov</span><span>21 Nov</span><span>30 Nov</span></div></article></div>
+        <article class="insight-strip"><span class="insight-star">✳</span><div><span class="card-kicker">A PATTERN TO NOTICE</span><p id="monthlyInsight">Your spending patterns will appear here.</p></div><button class="text-button" data-goto="transactions">Explore activity <span>→</span></button></article>
+      </section>
+
+      <section class="view" id="view-settings" aria-labelledby="settingsTitle">
+        <div class="page-heading"><div><p class="eyebrow">MAKE IT YOURS</p><h1 id="settingsTitle">Settings<span class="heading-spark">.</span></h1><p class="subheading">Your preferences, your pace.</p></div></div>
+        <div class="settings-layout"><div class="settings-main">
+          <article class="panel settings-panel"><div class="settings-panel-title"><span class="settings-icon">◷</span><div><h3>Personal preferences</h3><p>Set the numbers your month runs on.</p></div></div><div class="setting-row"><div><strong>Currency</strong><small>Used across your dashboard and reports</small></div><select id="currencySetting" aria-label="Currency"><option value="INR">Indian Rupee · INR</option><option value="USD">US Dollar · USD</option><option value="GBP">British Pound · GBP</option></select></div><div class="setting-row"><div><strong>Month starts on</strong><small>Choose the first day of your budget cycle</small></div><select id="monthStartSetting" aria-label="Month start day"><option value="1">1st of the month</option><option value="5">5th of the month</option><option value="10">10th of the month</option></select></div><div class="setting-row"><div><strong>Monthly income</strong><small>Optional, helps you see what you save</small></div><div class="money-input settings-money"><span id="incomeCurrency">₹</span><input id="incomeSetting" type="number" min="0" step="1000" placeholder="Not set" aria-label="Monthly income"></div></div></article>
+          <article class="panel settings-panel"><div class="settings-panel-title"><span class="settings-icon reminder-icon">◉</span><div><h3>Gentle reminders</h3><p>A small nudge to keep your month in view.</p></div></div><div class="setting-row"><div><strong>Daily logging reminder</strong><small>Every day at 9:00 pm</small></div><label class="toggle"><input id="reminderSetting" type="checkbox"><span></span></label></div><div class="setting-row"><div><strong>Weekly summary</strong><small>A Sunday evening recap</small></div><label class="toggle"><input id="weeklySetting" type="checkbox" checked><span></span></label></div></article>
+          <article class="panel settings-panel"><div class="settings-panel-title"><span class="settings-icon">⇩</span><div><h3>Your data</h3><p>Take a copy of your transactions or clear this device.</p></div></div><div class="setting-row"><div><strong>Export transactions</strong><small>Download your records as a CSV file</small></div><button class="button button-outline" id="exportCsv">Download CSV</button></div><div class="setting-row danger-row"><div><strong>Delete local data</strong><small>Remove transactions and preferences from this device</small></div><button class="button button-danger" id="deleteData">Delete data</button></div></article>
+        </div><aside class="privacy-card"><span class="privacy-lock">⌑</span><p class="card-kicker">PRIVATE BY DEFAULT</p><h3>Your money is yours.</h3><p>Everything you enter stays in this browser. No bank logins. No data leaves this device.</p><span class="privacy-foot"><i></i> Local storage is on</span></aside></div>
+      </section>
+    </main>
+  </div>
+  <nav class="mobile-nav" aria-label="Mobile navigation"><button class="mobile-nav-link active" data-view="overview"><span class="mobile-icon icon-home"></span>Home</button><button class="mobile-nav-link" data-view="transactions"><span class="mobile-icon icon-list"></span>Activity</button><button class="mobile-add" id="mobileAdd" aria-label="Add expense">+</button><button class="mobile-nav-link" data-view="budgets"><span class="mobile-icon icon-budget"></span>Budgets</button><button class="mobile-nav-link" data-view="insights"><span class="mobile-icon icon-chart"></span>Insights</button></nav>
+  <dialog class="entry-dialog" id="entryDialog" aria-labelledby="entryTitle"><form id="entryForm" method="dialog"><div class="dialog-header"><div><p class="eyebrow">QUICK ENTRY</p><h2 id="entryTitle">Log a spend<span class="heading-spark">.</span></h2></div><button type="button" class="icon-button" id="closeDialog" aria-label="Close">×</button></div>
+    <div class="entry-type" role="group" aria-label="Entry type"><button class="type-option active" type="button" data-type="expense">Expense</button><button class="type-option" type="button" data-type="income">Income</button></div>
+    <label class="field-label" for="amountInput">Amount</label><div class="amount-entry"><span id="entryCurrency">₹</span><input id="amountInput" name="amount" type="number" min="1" step="0.01" placeholder="0" required inputmode="decimal"></div>
+    <label class="field-label">Category</label><div class="category-picker" id="categoryPicker"></div>
+    <div class="form-row"><div><label class="field-label" for="dateInput">Date</label><input class="form-control" id="dateInput" name="date" type="date" required></div><div><label class="field-label" for="modeInput">Paid with</label><select class="form-control" id="modeInput" name="mode"><option>UPI</option><option>Card</option><option>Cash</option><option>Wallet</option><option>Bank transfer</option></select></div></div>
+    <label class="field-label" for="noteInput">Note <span class="optional">OPTIONAL</span></label><input class="form-control" id="noteInput" name="note" maxlength="200" placeholder="What was it for?"><div class="dialog-actions"><button type="button" class="button button-danger hidden" id="deleteEntry">Delete</button><button type="button" class="button button-light" id="cancelEntry">Cancel</button><button type="submit" class="button button-primary">Save entry <span>↗</span></button></div>
+  </form></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
